@@ -12,8 +12,8 @@
 
 #define BUILTIN_LED 2
 
-const char* ssid = "StoNET";
-const char* wpa2key = "pfandmann";
+const char* ssid = "****";
+const char* wpa2key = "****";
 
 IPAddress ip(192,168,2,11);
 IPAddress gateway(192,168,2,1);
@@ -47,6 +47,7 @@ void handleRequest();
 void handleGet();
 void handleSettings();
 void setupOTA();
+void setupHttpServer();
 void connectToWiFi();
 void turnOff();
 void turnOn();
@@ -90,27 +91,7 @@ void setup() {
 
     setupOTA();
 
-    server.on("/request", handleRequest);
-    server.on("/get", handleGet);
-    server.on("/settings", handleSettings);
-
-    server.on("/", HTTP_GET, []() {
-        if (webAppActive) {
-            server.send_P(200, "text/html", GUI);   
-        } else {
-            server.send(400, "text/plain", "Zugriff blockiert");
-        }
-    });
-
-    server.on("/admin", HTTP_GET, []() {
-        server.send_P(200, "text/html", ADMIN);
-    });
-
-    server.on("/iro.min.js", HTTP_GET, []() {
-        server.send_P(200, "application/javascript", IRO_JS);
-    });
-
-    server.begin();
+    setupHttpServer();
 
     Serial.println("Setup done");
     pinMode(BUILTIN_LED, OUTPUT);
@@ -259,6 +240,30 @@ void handleSettings() {
         webAppActive = true;
         server.send(200, "text/plain", "unlocked");
     }
+}
+
+void setupHttpServer() {
+    server.on("/request", handleRequest);
+    server.on("/get", handleGet);
+    server.on("/settings", handleSettings);
+
+    server.on("/", HTTP_GET, []() {
+        if (webAppActive) {
+            server.send_P(200, "text/html", GUI);   
+        } else {
+            server.send(400, "text/plain", "Zugriff blockiert");
+        }
+    });
+
+    server.on("/admin", HTTP_GET, []() {
+        server.send_P(200, "text/html", ADMIN);
+    });
+
+    server.on("/iro.min.js", HTTP_GET, []() {
+        server.send_P(200, "application/javascript", IRO_JS);
+    });
+
+    server.begin();
 }
 
 void setupOTA() {
