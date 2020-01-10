@@ -4,6 +4,15 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+platformio.ini
+test/*
+
+# Zeug
+.travis.yml
+.vscode/*
+
+# Exclude libs
+lib/*
 
 
 # Prerequisites
