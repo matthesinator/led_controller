@@ -12,14 +12,14 @@
 #include <css.h>
 #include <javascript.h>
 
-#define RED_LED 5
-#define GREEN_LED 4
-#define BLUE_LED 0
+#define RED_LED 14
+#define GREEN_LED 12
+#define BLUE_LED 5
 
 #define BUILTIN_LED 2
 
-const char* ssid = "wifi";
-const char* wpa2key = "key";
+const char* ssid = "WLAN-674166";
+const char* wpa2key = "kannstmichamarschleckendu31er";
 
 enum ResultCode{
 	LC_APPLIED_MODE,
@@ -31,7 +31,7 @@ enum ResultCode{
     LC_TOGGLE
 };
 
-IPAddress ip(192,168,2,111);
+IPAddress ip(192,168,2,113);
 IPAddress gateway(192,168,2,1);
 IPAddress subnet(255,255,255,0);
 
