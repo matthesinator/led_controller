@@ -18,8 +18,8 @@
 
 #define BUILTIN_LED 2
 
-const char* ssid = "WLAN-674166";
-const char* wpa2key = "kannstmichamarschleckendu31er";
+const char* ssid = "---";
+const char* wpa2key = "----";
 
 enum ResultCode{
 	LC_APPLIED_MODE,
